@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Study Buddy AI Assistant</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #dbeafe, #ede9fe);
+            margin: 0;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px #0002;
+        }
+
+        h1 {
+            text-align: center;
+            color: #4338ca;
+        }
+
+        p {
+            text-align: center;
+        }
+
+        input {
+            width: 95%;
+            padding: 12px;
+            margin-top: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 15px;
+            background: #4338ca;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #312e81;
+        }
+
+        #answer {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eef2ff;
+            border-radius: 10px;
+            line-height: 1.6;
+        }
+
+        a {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #4338ca;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>🤖 Study Buddy</h1>
+
+    <p><b>AI Powered Academic Assessment</b></p>
+
+    <hr>
+
+    <h3>Ask Your Study Question</h3>
+
+    <input
+        type="text"
+        id="question"
+        placeholder="Type your question here..."
+    >
+
+    <button onclick="askAssistant()">
+        Ask Assistant
+    </button>
+
+    <div id="answer" aria-live="polite">
+        Hello Student! 👋
+        How can I help you with your studies today?
+    </div>
+
+    <a href="index.html">← Back to Home</a>
+
+</div>
+
+<script>
+function askAssistant() {
+
+    let question = document
+        .getElementById("question")
+        .value.trim()
+        .toLowerCase();
+
+    let answer = "";
+
+    if (question === "") {
+        answer = "Please enter your question.";
+    }
+
+    else if (
+        question.includes("hello") ||
+        question.includes("hi")
+    ) {
+        answer = "Hello! Welcome to Study Buddy. How can I help you?";
+    }
+
+    else if (
+        question.includes("study") ||
+        question.includes("tips")
+    ) {
+        answer = "Study Tip: Study for 25 minutes, take a 5-minute break, and revise your lessons daily.";
+    }
+
+    else if (
+        question.includes("math")
+    ) {
+        answer = "Maths Tip: Learn the formulas, solve problems step by step, and practise daily.";
+    }
+
+    else if (
+        question.includes("c programming") ||
+        question.includes("programming")
+    ) {
+        answer = "C Programming Tip: Practise variables, operators, if-else statements, loops, and functions.";
+    }
+
+    else if (
+        question.includes("chemistry") ||
+        question.includes("science")
+    ) {
+        answer = "Science Tip: Understand concepts, learn definitions, practise diagrams, and revise regularly.";
+    }
+
+    else if (
+        question.includes("exam") ||
+        question.includes("revision")
+    ) {
+        answer = "Exam Tip: Prepare a timetable, revise important topics, and practise sample questions.";
+    }
+
+    else if (
+        question.includes("quiz")
+    ) {
+        answer = "Quiz Tip: Test your knowledge regularly and review every incorrect answer.";
+    }
+
+    else {
+        answer = "Break your topic into small parts, read your notes, practise examples, and revise regularly. Try asking about Maths, C Programming, Science, or study tips.";
+    }
+
+    document.getElementById("answer").textContent =
+        "Study Buddy: " + answer;
+}
+</script>
+
+</body>
+         </html>
+         
