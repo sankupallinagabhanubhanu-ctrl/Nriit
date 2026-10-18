@@ -1,6 +1,68 @@
 // ==========================================
 // 1. QUIZ LOGIC (For quiz.html)
-// ==========================================
+// ============================# 📘 Study Buddy – AI Powered Academic Assessment
+
+## About the Project
+Study Buddy is a student-friendly website designed to help
+students practise quizzes, assess their knowledge, and
+improve their academic performance.
+
+## 🎯 Aim
+To develop a simple website that helps students evaluate
+their learning and identify topics for improvement.
+
+## 🎯 Objectives
+- Provide online practice quizzes.
+- Display quiz scores automatically.
+- Give learning improvement suggestions.
+- Support student learning.
+
+## ❓ Problem Statement
+Students may find it difficult to identify their weak
+subjects and understand their learning progress.
+
+## 💭 Empathy Map
+- Says: I want to improve my marks.
+- Thinks: Which topic should I study?
+- Does: Practises questions.
+- Feels: Happy when progress improves.
+- Needs: Easy quizzes and useful feedback.
+
+## 💡 Ideation
+We developed the idea of a website with quizzes,
+instant results, and study suggestions.
+
+## 💻 Prototype Features
+- Home Page
+- Aim and Objectives
+- Problem Statement
+- Empathy Map
+- Ideation
+- Online Quiz
+- Automatic Quiz Score
+- Feedback Form
+- Testing
+- Conclusion
+
+## 🧪 Testing
+The website can be tested by opening the pages,
+attempting the quiz, checking scores, and submitting
+prototype feedback.
+
+## 🎓 Conclusion
+Study Buddy provides a simple prototype to help students
+practise questions and understand their learning progress.
+
+## 🛠️ Technologies Used
+- HTML
+- CSS
+- JavaScript
+- GitHub Pages
+
+## 👩‍🎓 Project Type
+Design Thinking and Innovation (DTI)
+
+**Project Name:** Study Buddy – AI Powered Academic Assessment==============
 const quizData = [
   {
     question: "What is the primary role of AI in education?",
