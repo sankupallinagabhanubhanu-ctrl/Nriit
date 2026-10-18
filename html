@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Study Buddy - AI Powered Academic Assessment</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,Helvetica,sans-serif}
+:root{--navy:#172554;--blue:#2563eb;--sky:#38bdf8;--light:#f4f7ff;--text:#24324b;--white:#fff;--muted:#64748b}
+html{scroll-behavior:smooth}
+body{background:var(--light);color:var(--text);line-height:1.6}
+a{color:inherit;text-decoration:none}
+header{background:var(--navy);color:white;padding:16px 6%;display:flex;justify-content:space-between;align-items:center;gap:18px;flex-wrap:wrap;position:sticky;top:0;z-index:10;box-shadow:0 4px 16px #17255422}
+.logo{font-size:23px;font-weight:800;letter-spacing:.2px}
+.logo span{color:var(--sky)}
+nav{display:flex;gap:15px;flex-wrap:wrap}
+nav a{font-size:14px;color:#e2e8f0;padding:7px 9px;border-radius:8px}
+nav a:hover{background:#ffffff20;color:white}
+.hero{padding:76px 7%;background:linear-gradient(135deg,#172554,#1d4ed8);color:white;display:grid;grid-template-columns:1.4fr 1fr;gap:35px;align-items:center}
+.tag{display:inline-block;background:#ffffff20;border:1px solid #ffffff40;padding:6px 12px;border-radius:20px;font-size:13px;margin-bottom:18px}
+.hero h1{font-size:clamp(34px,5vw,55px);line-height:1.12;margin-bottom:20px}
+.hero h1 span{color:#7dd3fc}
+.hero p{font-size:17px;color:#e0e7ff;max-width:650px;margin-bottom:24px}
+.btn{display:inline-block;background:#38bdf8;color:#082f49;font-weight:700;padding:12px 18px;border-radius:10px;border:0;cursor:pointer;margin:4px 8px 4px 0}
+.btn.secondary{background:white;color:var(--navy)}
+.hero-card{background:white;color:var(--navy);border-radius:22px;padding:28px;box-shadow:0 18px 45px #02061735}
+.hero-card h3{font-size:21px;margin-bottom:12px}
+.stat{display:flex;justify-content:space-between;gap:12px;padding:12px 0;border-bottom:1px solid #e2e8f0}
+.stat:last-child{border:0}
+.pill{background:#dbeafe;color:#1d4ed8;border-radius:20px;padding:4px 10px;font-size:12px;font-weight:700}
+section{padding:62px 7%;scroll-margin-top:85px}
+.section-title{text-align:center;margin-bottom:34px}
+.section-title h2{font-size:clamp(27px,4vw,36px);color:var(--navy);margin-bottom:8px}
+.section-title p{color:var(--muted);max-width:700px;margin:auto}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:20px}
+.card{background:white;padding:24px;border-radius:16px;box-shadow:0 7px 24px #1725540d;border:1px solid #e6ebf5}
+.card .icon{font-size:30px;margin-bottom:10px}
+.card h3{color:var(--navy);margin-bottom:9px;font-size:19px}
+.card p,.card li{color:#526079;font-size:15px}
+.card ul{padding-left:20px;margin-top:8px}
+.alt{background:#eaf0ff}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:24px;align-items:start}
+.info-box{background:white;border-left:5px solid var(--blue);padding:23px;border-radius:12px;margin-bottom:16px}
+.info-box h3{color:var(--navy);margin-bottom:7px}
+.steps{counter-reset:step}
+.step{position:relative;padding:0 0 22px 54px}
+.step:before{counter-increment:step;content:counter(step);position:absolute;left:0;top:0;background:var(--blue);color:white;width:36px;height:36px;display:grid;place-items:center;border-radius:50%;font-weight:bold}
+.form-panel{background:white;border-radius:18px;padding:25px;box-shadow:0 7px 24px #1725540d}
+label{display:block;font-weight:700;color:var(--navy);margin:12px 0 6px}
+input,select,textarea{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:9px;font-size:15px;background:#fff;color:var(--text)}
+textarea{min-height:100px;resize:vertical}
+.result{margin-top:18px;background:#eff6ff;border:1px solid #bfdbfe;padding:18px;border-radius:12px;display:none}
+.question{padding:17px 0;border-bottom:1px solid #e2e8f0}
+.question p{font-weight:700;margin-bottom:9px}
+.question label{display:inline-flex;align-items:center;gap:7px;font-weight:400;margin:6px 15px 0 0;color:#475569}
+.question input{width:auto}
+.feedback-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:14px}
+footer{background:#0f172a;color:#cbd5e1;padding:30px 7%;text-align:center}
+footer strong{color:white}
+.small{font-size:13px;color:var(--muted)}
+@media(max-width:850px){.hero{grid-template-columns:1fr;padding:55px 6%}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}header{position:static}section{padding:48px 6%}}
+@media(max-width:560px){.grid,.two-col,.feedback-list{grid-template-columns:1fr}.logo{font-size:20px}nav{gap:5px}nav a{font-size:12px;padding:6px}.hero{padding:42px 6%}.hero-card{padding:21px}}
+</style>
+</head>
+<body>
+<header>
+  <a class="logo" href="#home">📘 Study <span>Buddy AI</span></a>
+  <nav aria-label="Main navigation">
+    <a href="#home">Home</a><a href="#aim">Aim</a><a href="#problem">Problem</a>
+    <a href="#empathy">Empathy</a><a href="#ideation">Ideation</a><a href="#prototype">Prototype</a>
+    <a href="#quiz">Quiz</a><a href="#testing">Testing</a><a href="#conclusion">Conclusion</a>
+  </nav>
+</header>
+
+<main>
+<section class="hero" id="home">
+  <div>
+    <span class="tag">DTI Project • Student Learning Support</span>
+    <h1>Learn smarter with <span>Study Buddy AI</span></h1>
+    <p>An AI-inspired academic assessment prototype that helps students practise quizzes, review their performance, identify topics to improve, and plan their next study steps.</p>
+    <a class="btn" href="#quiz">Take a Quick Quiz</a>
+    <a class="btn secondary" href="#aim">Explore the Project</a>
+  </div>
+  <div class="hero-card">
+    <h3>📊 Your learning dashboard</h3>
+    <div class="stat"><span>Practice quizzes</span><strong>Quick & simple</strong></div>
+    <div class="stat"><span>Instant score</span><span class="pill">After submit</span></div>
+    <div class="stat"><span>Study guidance</span><strong>Topic-based</strong></div>
+    <div class="stat"><span>Designed for</span><strong>Students</strong></div>
+    <p class="small" style="margin-top:14px">Prototype demonstration — scores are calculated in your browser.</p>
+  </div>
+</section>
+
+<section id="aim">
+  <div class="section-title"><h2>Aim & Objectives</h2><p>Our goal is to make academic practice easier to understand, more engaging, and more useful for students.</p></div>
+  <div class="grid">
+    <article class="card"><div class="icon">🎯</div><h3>Aim</h3><p>To design a student-friendly website that demonstrates academic assessment and personalised learning support using AI-inspired ideas.</p></article>
+    <article class="card"><div class="icon">📚</div><h3>Objectives</h3><ul><li>Provide a short practice quiz.</li><li>Show the score immediately.</li><li>Encourage regular practice.</li><li>Suggest areas for improvement.</li></ul></article>
+    <article class="card"><div class="icon">🌱</div><h3>Expected Outcome</h3><p>Students can understand their practice performance and choose what to revise next.</p></article>
+  </div>
+</section>
+
+<section class="alt" id="problem">
+  <div class="section-title"><h2>Problem Statement</h2><p>Understanding the learning difficulty before designing a solution.</p></div>
+  <div class="two-col">
+    <div class="info-box"><h3>The Problem</h3><p>Some students do not receive quick feedback after practice. They may find it difficult to identify weak topics, track progress, or decide what to study next.</p></div>
+    <div class="info-box"><h3>Our Design Question</h3><p><strong>How might we help students assess their knowledge and understand what they should revise next through a simple website?</strong></p></div>
+  </div>
+</section>
+
+<section id="empathy">
+  <div class="section-title"><h2>Empathy Map</h2><p>We consider what a student may say, think, do, and feel while studying.</p></div>
+  <div class="grid">
+    <article class="card"><div class="icon">💬</div><h3>Says</h3><p>“I want to know how well I am preparing.”</p></article>
+    <article class="card"><div class="icon">💭</div><h3>Thinks</h3><p>“Which topic should I revise first?”</p></article>
+    <article class="card"><div class="icon">✍️</div><h3>Does</h3><p>Practises questions, checks answers, and revises notes.</p></article>
+    <article class="card"><div class="icon">😊</div><h3>Feels</h3><p>Feels confident when progress is clear; may feel worried when feedback is missing.</p></article>
+    <article class="card"><div class="icon">😟</div><h3>Pains</h3><p>Unclear results, limited time, and difficulty finding weak areas.</p></article>
+    <article class="card"><div class="icon">⭐</div><h3>Needs</h3><p>Simple quizzes, understandable feedback, and practical study suggestions.</p></article>
+  </div>
+</section>
+
+<section class="alt" id="ideation">
+  <div class="section-title"><h2>Ideation</h2><p>Possible ideas considered for solving the problem.</p></div>
+  <div class="grid">
+    <article class="card"><div class="icon">📝</div><h3>Online Quiz</h3><p>Give students short multiple-choice questions for practice.</p></article>
+    <article class="card"><div class="icon">📈</div><h3>Instant Results</h3><p>Calculate and display a score after the quiz is submitted.</p></article>
+    <article class="card"><div class="icon">🧭</div><h3>Revision Guidance</h3><p>Offer simple advice based on the score and selected answers.</p></article>
+  </div>
+</section>
+
+<section id="prototype">
+  <div class="section-title"><h2>Prototype Features</h2><p>This working front-end prototype demonstrates the main user journey.</p></div>
+  <div class="grid">
+    <article class="card"><div class="icon">🏠</div><h3>Home Page</h3><p>Introduces Study Buddy AI and links to the main sections.</p></article>
+    <article class="card"><div class="icon">🧠</div><h3>Quiz Assessment</h3><p>Students answer sample academic questions and submit them.</p></article>
+    <article class="card"><div class="icon">💡</div><h3>Feedback</h3><p>The site shows the score and a general recommendation.</p></article>
+  </div>
+  <p class="small" style="text-align:center;margin-top:18px">Note: This is a demonstration prototype. It does not connect to an AI model or save student data to a server.</p>
+</section>
+
+<section class="alt" id="quiz">
+  <div class="section-title"><h2>Quick Practice Quiz</h2><p>Answer all five sample questions and tap “Submit Quiz” to see your result.</p></div>
+  <div class="form-panel">
+    <form id="quizForm">
+      <div class="question"><p>1. Which language is commonly used to create the structure of a website?</p>
+        <label><input type="radio" name="q1" value="0"> Python</label><label><input type="radio" name="q1" value="1"> HTML</label><label><input type="radio" name="q1" value="0"> C</label></div>
+      <div class="question"><p>2. What does CSS mainly control?</p>
+        <label><input type="radio" name="q2" value="0"> Database storage</label><label><input type="radio" name="q2" value="1"> Page styling</label><label><input type="radio" name="q2" value="0"> Computer hardware</label></div>
+      <div class="question"><p>3. Which symbol is used to end most C statements?</p>
+        <label><input type="radio" name="q3" value="1"> Semicolon ;</label><label><input type="radio" name="q3" value="0"> Comma ,</label><label><input type="radio" name="q3" value="0"> Colon :</label></div>
+      <div class="question"><p>4. Which of these is a loop in C?</p>
+        <label><input type="radio" name="q4" value="0"> printf</label><label><input type="radio" name="q4" value="0"> scanf</label><label><input type="radio" name="q4" value="1"> while</label></div>
+      <div class="question"><p>5. What should you do after finding a topic difficult?</p>
+        <label><input type="radio" name="q5" value="0"> Stop studying it</label><label><input type="radio" name="q5" value="1"> Review it and practise more</label><label><input type="radio" name="q5" value="0"> Ignore all feedback</label></div>
+      <button class="btn" type="submit">Submit Quiz</button>
+      <button class="btn secondary" type="reset" id="resetQuiz">Try Again</button>
+    </form>
+    <div class="result" id="quizResult" role="status" aria-live="polite"></div>
+  </div>
+</section>
+
+<section id="testing">
+  <div class="section-title"><h2>Testing & Feedback</h2><p>Use these checks when presenting the prototype to classmates or your teacher.</p></div>
+  <div class="two-col">
+    <div class="card"><h3>Testing Checklist</h3>
+      <div class="steps">
+        <div class="step"><strong>Open the website</strong><p>Check that the home page loads correctly on mobile and computer.</p></div>
+        <div class="step"><strong>Try the navigation</strong><p>Tap each menu item and confirm it reaches the correct section.</p></div>
+        <div class="step"><strong>Submit the quiz</strong><p>Answer questions and check that the score and feedback appear.</p></div>
+        <div class="step"><strong>Collect feedback</strong><p>Ask students whether the website is clear and easy to use.</p></div>
+      </div>
+    </div>
+    <div class="form-panel">
+      <h3>Share Prototype Feedback</h3>
+      <p class="small">This demo shows a message on this device; it does not send feedback online.</p>
+      <form id="feedbackForm">
+        <label for="studentName">Name (optional)</label><input id="studentName" type="text" placeholder="Enter your name">
+        <label for="rating">How easy was the website?</label>
+        <select id="rating" required><option value="">Choose a rating</option><option>Very easy</option><option>Easy</option><option>Average</option><option>Difficult</option></select>
+        <label for="suggestion">Your suggestion</label><textarea id="suggestion" placeholder="What should we improve?" required></textarea>
+        <button class="btn" type="submit">Show Feedback</button>
+      </form>
+      <div class="result" id="feedbackResult" role="status" aria-live="polite"></div>
+    </div>
+  </div>
+</section>
+
+<section class="alt" id="conclusion">
+  <div class="section-title"><h2>Conclusion</h2><p>Study Buddy AI demonstrates how a simple digital tool can support student practice.</p></div>
+  <div class="info-box"><h3>Final Summary</h3><p>This Design Thinking project identifies a student learning challenge and presents a website prototype with a quiz, score calculation, and feedback guidance. Future versions could include student accounts, subject-wise quizzes, progress tracking, and a real AI service with appropriate privacy safeguards.</p></div>
+  <div class="grid">
+    <article class="card"><h3>What we learned</h3><p>Understand student needs before designing a solution.</p></article>
+    <article class="card"><h3>What works now</h3><p>Navigation, sample quiz scoring, and on-screen feedback.</p></article>
+    <article class="card"><h3>Future improvement</h3><p>Add more questions, subject selection, and secure progress storage.</p></article>
+  </div>
+</section>
+</main>
+
+<footer>
+  <p><strong>📘 Study Buddy – AI Powered Academic Assessment</strong></p>
+  <p>DTI Project Prototype • Learn • Practise • Improve</p>
+  <p class="small" style="color:#cbd5e1;margin-top:8px">Created for educational demonstration. Quiz results are practice scores, not official academic grades.</p>
+</footer>
+
+<script>
+document.getElementById('quizForm').addEventListener('submit', function(event){
+  event.preventDefault();
+  const total = 5;
+  let score = 0;
+  let answered = 0;
+  for(let i=1;i<=total;i++){
+    const selected = this.querySelector('input[name="q'+i+'"]:checked');
+    if(selected){answered++;score += Number(selected.value);}
+  }
+  const result = document.getElementById('quizResult');
+  result.style.display = 'block';
+  if(answered < total){
+    result.innerHTML = '<strong>Please answer all questions.</strong><br>You have answered '+answered+' out of '+total+'.';
+    return;
+  }
+  const percent = Math.round(score/total*100);
+  let advice = '';
+  if(percent >= 80) advice = 'Excellent work! Keep practising to maintain your progress.';
+  else if(percent >= 60) advice = 'Good effort. Review the questions you missed and try again.';
+  else advice = 'Keep going! Review your notes, practise the basics, and retake the quiz.';
+  result.innerHTML = '<h3>Your Result: '+score+' / '+total+' ('+percent+'%)</h3><p>'+advice+'</p>';
+});
+document.getElementById('resetQuiz').addEventListener('click', function(){
+  const result = document.getElementById('quizResult');
+  result.style.display = 'none';
+  result.innerHTML = '';
+});
+document.getElementById('feedbackForm').addEventListener('submit', function(event){
+  event.preventDefault();
+  const name = document.getElementById('studentName').value.trim();
+  const rating = document.getElementById('rating').value;
+  const suggestion = document.getElementById('suggestion').value.trim();
+  const result = document.getElementById('feedbackResult');
+  result.style.display = 'block';
+  result.textContent = 'Thank you'+(name ? ', '+name : '')+'! Your rating: '+rating+'. Suggestion: '+suggestion+'. (Demo only — not sent online.)';
+});
+</script>
+</body>
+</html>
